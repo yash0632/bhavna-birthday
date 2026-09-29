@@ -181,7 +181,7 @@ export default function NameGate({ onVerified }: NameGateProps) {
 
     // Log group attempt
     fetch(
-      "https://script.google.com/macros/s/AKfycbyvMC-Wa5krnGNTNj3nrD07w7ATDOokhoVUj7ECC4Ei2I79IkUUhEA_qvMfojOHputOQw/exec",
+      "https://script.google.com/macros/s/AKfycbw098AleP8camcTnLad7vDHQkfZnnVNHBQIAPT4DC7ZaaUjOac10_k7pKigW6NpdL0omQ/exec",
       {
         method: "POST",
         mode: "no-cors",

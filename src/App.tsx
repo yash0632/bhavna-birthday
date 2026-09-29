@@ -16,6 +16,7 @@ import LetterSection from "./components/LetterSection";
 import backgroundMusic from "./assets/music.mp3";
 import "./App.css";
 import GlimpseReveal from "./components/GlimpseReveal";
+import { useSessionTracking } from "./hooks/useSessionTracking"; // NEW
 // Import photos from assets/solo
 
 //import p1 from "./assets/solo/p1.jpeg"
@@ -65,10 +66,6 @@ const TOTAL_SECTIONS = 3;
 const SECTION_LETTER = 2;
 
 export default function App() {
-  // Track if user has clicked start
-  
-
-
   // Track which section is currently active (0 = Hero, 1 = Solo Photos, 2 = Together Photos, 3 = Letter)
   const [currentSection, setCurrentSection] = useState(0);
 
@@ -76,7 +73,11 @@ export default function App() {
   const [isMuted, setIsMuted] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
 
-    const [phase, setPhase] = useState<"gate" | "glimpse" | "main">("gate");
+  const [phase, setPhase] = useState<"gate" | "glimpse" | "main">("gate");
+
+  // NEW — logs a session (device, duration, sections reached) to your
+  // Google Sheet whenever she leaves or backgrounds the tab
+  useSessionTracking(() => currentSection + 1);
 
   useEffect(() => {
   // Preload the glimpse image
@@ -212,38 +213,6 @@ export default function App() {
       </AnimatePresence>
 
 
-      {phase === "main" && (
-        <button
-          className="music-toggle"
-          onClick={toggleMute}
-          aria-label={isMuted ? "Unmute music" : "Mute music"}
-        >
-          {isMuted ? (
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
-              <path d="M11 5L6 9H2v6h4l5 4V5z" />
-              <line x1="23" y1="9" x2="17" y2="15" />
-              <line x1="17" y1="9" x2="23" y2="15" />
-            </svg>
-          ) : (
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
-              <path d="M11 5L6 9H2v6h4l5 4V5z" />
-              <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
-              <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
-            </svg>
-          )}
-        </button>
-      )}
-      {/* Music Toggle Button - only show after start */}
       {phase === "main" && (
         <button
           className="music-toggle"
