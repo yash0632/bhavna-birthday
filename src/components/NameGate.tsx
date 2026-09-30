@@ -315,6 +315,14 @@ export default function NameGate({ onVerified }: NameGateProps) {
                   duration: 0.5,
                 }}
               >
+                <motion.span
+                  initial={{ opacity: 0, scale: 0.5 }}
+                  animate={{ opacity: 0.8, scale: 1 }}
+                  transition={{ duration: 0.6 }}
+                  style={{ display: "block", fontSize: "1.5rem", marginBottom: "1rem" }}
+                >
+                  🎂
+                </motion.span>
                 <motion.p
                   className="start-question"
                 >
@@ -430,6 +438,14 @@ export default function NameGate({ onVerified }: NameGateProps) {
                   duration: 0.5,
                 }}
               >
+                <motion.span
+                  initial={{ opacity: 0, scale: 0.5 }}
+                  animate={{ opacity: 0.8, scale: 1 }}
+                  transition={{ duration: 0.6 }}
+                  style={{ display: "block", fontSize: "1.5rem", marginBottom: "1rem" }}
+                >
+                  👥
+                </motion.span>
                 <motion.p
                   className="start-question"
                 >
