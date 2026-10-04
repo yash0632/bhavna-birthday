@@ -81,8 +81,8 @@ message: [
 
   /* Typing Animation Text (shown on the start screen) */
   typingText: {
-    first: "Hey, wait a second!",
-    second: "This website is for someone who i miss on my every monday.",
+    first: "Hope you see it till the end!",
+    second: "This website is for someone who i miss sharing train rides with.",
     third: "Hope you see it till the end!"
   },
 };
