@@ -35,43 +35,39 @@ export const config = {
 
 message: [
 
-  "First of all Happy Birthday Bhavna🥳🎂",
+  "First of all Happy birthday Bhavna🥳🎂",
   //"",
-  "I honestly really dont know what to say and i was not even sure whether i should do this or not.You really would not have expect from us to do such a thing,dont really know if you would even like it or not but we really wanted to do something for you on your birthday and we both really hope you like it.",
+  "I honestly dont know what to say or whether i should do something like this or not,dont really know if you would even like it or not but hope you like it.",
   //"",
-  //"I did quite a few mistakes this year and you have forgiven me for more than once, so i will not ask for forgiveness this time.",
+  "I wanted to do something nice something special for your birthday however i can ,so to not let things end on bad terms.",
   //"",
-  "I just wanted to do something nice for you to make you feel special, to not let things end on bad terms so made this little website.",
+  "I made so many mistakes this year mistakenly and intentionally which you have tolerated,i cant even count so very sorry for all the suffering,disturbance of your peace you have to bear because of me(never wanted that).",
   //"",
-  //"I know making this website does not make up for my mistakes and you might even think this is just another attempt to make you come back and join us again and honestly, i will be lying if i said its not.",
+  "I know making up this website does not make up for my mistakes,I only tried to make this website only to make your birthday a little special,to make you smile once if possible ,but somewhere in all this two thousand eight hundred sixty seven lines of code, there’s a tiny bit hope you might forgive me and anurag one day and we can share train rides together and maybe for one time ,have a mountain trip ,i still remember you saying mountains were the place you’d most like to visit. So maybe someday. Who knows. 🏔️",
   //"",
-  "I know making up this website does not make up for my mistakes. I tried to make this website only to make you feel special on your birthday which you really are, no doubt about that and make you smile a little, but somewhere in all this one thousand four hundred thirty seven lines of code, there’s a tiny bit hope that may be one day you will forgive us and we can have trips together again as onlyplans (that - whats our group name question and the loading of onlyplans logo was anurag’s idea 😒🥲) - especially a mountain trip, we still remember you saying mountains were the place you’d most like to visit. So maybe someday. Who knows. 🏔️",
+  "We really wanted to celebrate your birthday with you at least once and one time we both were making plans about it (anurag even said you will let us order anything on your birthday😋)",
   //"",
-  "But Really this time, we dont want to force anything and try not to do it ever again.",
+  "But really No pressure, though — if you want to come back, we'll be happy, and if you don't, we'll respect that completely.",
   //"",
-  "If you want to come back, we’ll be happy. If you don’t, we’ll respect that too.",
+  "If I'm honest, these past few months — and you not wishing Anurag on his birthday — have already told me what the answer probably is. And that's okay.",
   //"",
-  "We really wanted to celebrate your birthday with you at least once and once we both were making plans about it (Anurag said you will let us order anything on your birthday party😋)",
-  //"",
-  "So we are sorry for everything 🥲 - especially for the times we made things bad when they could have been better.",
+  "So i am sorry for everything 🥲 - especially for the times i made things bad when they could have been better.",
   //"",
   "Anyway enough of all that,",
   //"",
-  "Happy Birthday Once Again Bhavna🧿",
+  "Happy Birthday Once Again Bhavna",
   //"",
-  "We both hope this becomes one of your best birthdays, and we both hope every birthday after this one is even better.",
+  "I hope this becomes one of your best birthdays, and i hope every birthday after this one is even better.",
   //"",
-  "We hope all your wishes come true and Hope you and your family will always be healthy, happy and always smiling.",
+  "I hope all your wishes come true and hope you and your family will always be healthy, happy and always smiling.",
   //"",
-  "Aur haan… Anurag specifically Beat me ki ye bhi likh 😵‍💫😵:",
+  "You dont have to reply to this message if you dont want to.",
   //"",
-  "If someday you feel like having trips with us again and want to give us one more chance to be your friends, you know you can text us anytime anyday. ❤️",
- // "",
   "No Pressure,No Expectations",
   //"",
   "Happy Birthday!",
-  "Take Care!",
-  "- Jalankhurra(yash) and gaubar(anurag)"
+  "Take care!",
+  "- Jalankhurra(yash)"
 
 ],
 
@@ -86,7 +82,8 @@ message: [
   /* Typing Animation Text (shown on the start screen) */
   typingText: {
     first: "Hey, wait a second!",
-    second: "This website is only for someone special to us.",
+    second: "This is for someone who meant a lot to us as a friend.",
+    third: "Hope you see it till the end!"
   },
 };
 

@@ -26,7 +26,7 @@ const PAUSE_AFTER: Record<string, number> = {
 
 const START_DELAY = 500;
 
-const EMPHASIS_INDEX = 3;
+const EMPHASIS_INDEX = 4;
 const EMPHASIS_SPEED_MULTIPLIER = 1.9;
 const PRE_EMPHASIS_PAUSE = 1100;
 const POST_EMPHASIS_PAUSE = 1600;
