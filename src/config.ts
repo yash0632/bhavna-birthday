@@ -67,8 +67,8 @@ message: [
   //"",
   "Happy Birthday!",
   "Take care!",
-  "- Jalankhurra(yash)"
-
+  "Sorry yaar!",
+  "- yash(Jalankhurra)"
 ],
 
   /* Theme Colors - Change these to customize the entire website theme! */
