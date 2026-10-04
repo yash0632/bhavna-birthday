@@ -82,7 +82,7 @@ message: [
   /* Typing Animation Text (shown on the start screen) */
   typingText: {
     first: "Hey, wait a second!",
-    second: "This is for someone who meant a lot to us as a friend.",
+    second: "This website is for someone who i miss on my every monday.",
     third: "Hope you see it till the end!"
   },
 };
