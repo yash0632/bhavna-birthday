@@ -50,13 +50,13 @@ import cakeImg from "./assets/cake.gif";
 const SOLO_PHOTOS: MediaItem[] = [
   { type: "photo", src: p8 },
   { type: "video", src: m1, poster: m1_poster, caption: "strike😂" },
-  { type: "photo", src: p2 },
+  { type: "photo", src: p9 },
   { type: "video", src: m4, poster: m4_poster, caption: "best day ever" },
-  { type: "photo", src: p7 },
+  { type: "photo", src: p2 },
   { type: "video", src: m3, poster: m3_poster },
   { type: "video", src: m2 ,poster: m2_poster},
   { type: "photo", src: p4 },
-  { type: "photo", src: p9 },
+  { type: "photo", src: p7 },
 ];
 
 
