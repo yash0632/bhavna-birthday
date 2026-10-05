@@ -8,12 +8,13 @@
    ========================================== */
 
 import { useState, useEffect, useMemo, useRef } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import confetti from "canvas-confetti";
 import styles from "./HeroSection.module.css";
 import { config } from "../config";
 import bannerImg from "../assets/banner.gif";
 import cakeImg from "../assets/cake.gif";
+import wishChime from "../assets/wish-chime.mp3";
 
 interface HeroSectionProps {
   onNextSection: () => void;
@@ -25,8 +26,9 @@ export default function HeroSection({ onNextSection }: HeroSectionProps) {
   const [showButton, setShowButton] = useState(false);
   const [showGreeting, setShowGreeting] = useState(false);
   const [wishMade, setWishMade] = useState(false);
+  const [wishSent, setWishSent] = useState(false); // NEW
   const cakeWrapRef = useRef<HTMLDivElement>(null);
-
+  const chimeRef = useRef<HTMLAudioElement>(null); // NEW
   useEffect(() => {
     const greetingTimer = setTimeout(() => setShowGreeting(true), 200);
     const buttonTimer = setTimeout(() => setShowButton(true), 5000);
@@ -53,27 +55,42 @@ export default function HeroSection({ onNextSection }: HeroSectionProps) {
   // A gentle heart-burst confetti fired from wherever the cake actually
   // sits on screen, plus a bounce + glow shift on the cake itself.
   const handleMakeWish = () => {
-    if (wishMade) return;
-    setWishMade(true);
+  if (wishMade) return;
+  setWishMade(true);
 
-    const rect = cakeWrapRef.current?.getBoundingClientRect();
-    const origin = rect
-      ? {
-          x: (rect.left + rect.width / 2) / window.innerWidth,
-          y: (rect.top + rect.height / 2) / window.innerHeight,
-        }
-      : { x: 0.5, y: 0.55 };
-
-    confetti({
-      particleCount: 40,
-      spread: 70,
-      startVelocity: 28,
-      scalar: 0.9,
-      shapes: ["circle"],
-      colors: ["#f472b6", "#ec4899", "#fbcfe8", "#ffffff"],
-      origin,
+  // Play the chime immediately on tap — the audio cue IS the
+  // moment, so it should fire with zero delay, same instant as the tap
+  if (chimeRef.current) {
+    chimeRef.current.currentTime = 0;
+    chimeRef.current.volume = 0.5; // soft, not jarring
+    chimeRef.current.play().catch(() => {
+      // Autoplay restrictions sometimes block this on first interaction
+      // in some browsers — safe to ignore, confetti still plays regardless
     });
-  };
+  }
+
+  const rect = cakeWrapRef.current?.getBoundingClientRect();
+  const origin = rect
+    ? {
+        x: (rect.left + rect.width / 2) / window.innerWidth,
+        y: (rect.top + rect.height / 2) / window.innerHeight,
+      }
+    : { x: 0.5, y: 0.55 };
+
+  confetti({
+    particleCount: 40,
+    spread: 70,
+    startVelocity: 28,
+    scalar: 0.9,
+    shapes: ["circle"],
+    colors: ["#f472b6", "#ec4899", "#fbcfe8", "#ffffff"],
+    origin,
+  });
+
+  setTimeout(() => {
+    setWishSent(true);
+  }, 2200);
+};
 
   return (
     <section className={styles.hero}>
@@ -127,7 +144,7 @@ export default function HeroSection({ onNextSection }: HeroSectionProps) {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.9, delay: 0.5, ease: "easeOut" }}
       />
-
+      <audio ref={chimeRef} src={wishChime} preload="auto" />
       {/* Birthday Cake — tappable to make a wish */}
       <div
         className={styles.cakeWrap}
@@ -187,10 +204,44 @@ export default function HeroSection({ onNextSection }: HeroSectionProps) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.5 }}
           >
-            wish made 🌟 may it come true
+            your wish is heard , may it come true, Bhavna 🌟
           </motion.span>
         )}
       </div>
+
+      {/* The wish itself, drifting upward and away a few seconds after being made */}
+<AnimatePresence>
+  {wishSent && (
+    <motion.div
+      className={styles.wishOrb}
+      initial={{
+        opacity: 0,
+        scale: 0.6,
+        left: cakeWrapRef.current
+          ? cakeWrapRef.current.getBoundingClientRect().left +
+            cakeWrapRef.current.getBoundingClientRect().width / 2
+          : "50%",
+        top: cakeWrapRef.current
+          ? cakeWrapRef.current.getBoundingClientRect().top
+          : "55%",
+      }}
+      animate={{
+        opacity: [0, 1, 1, 0],
+        scale: [0.6, 1, 0.8, 0.4],
+        y: -400,
+        x: [0, 15, -10, 20],
+      }}
+      transition={{
+        duration: 4.5,
+        ease: "easeOut",
+        times: [0, 0.15, 0.7, 1],
+      }}
+      onAnimationComplete={() => setWishSent(false)}
+    >
+      ✨
+    </motion.div>
+  )}
+</AnimatePresence>
 
       {/* Soft encouraging subtitle */}
       <motion.p

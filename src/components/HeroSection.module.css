@@ -395,3 +395,16 @@
     padding-bottom: 4.5rem; /* smaller, fixed value — matches the new railwayScene height */
   }
 }
+
+/* ==========================================
+   The wish, drifting off after being made
+   ========================================== */
+.wishOrb {
+  position: fixed;
+  font-size: 1.5rem;
+  pointer-events: none;
+  z-index: 50;
+  filter: drop-shadow(0 0 8px rgba(244, 114, 182, 0.7))
+    drop-shadow(0 0 16px rgba(244, 114, 182, 0.4));
+  transform: translate(-50%, -50%);
+}
