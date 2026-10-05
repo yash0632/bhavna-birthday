@@ -54,6 +54,7 @@ export default function HeroSection({ onNextSection }: HeroSectionProps) {
   const chimeRef = useRef<HTMLAudioElement>(null); // NEW
   const [balloons, setBalloons] = useState<Balloon[]>([]);
   const balloonIdRef = useRef(0);
+  const [leaving, setLeaving] = useState(false);
 
   useEffect(() => {
     const greetingTimer = setTimeout(() => setShowGreeting(true), 200);
@@ -149,19 +150,25 @@ export default function HeroSection({ onNextSection }: HeroSectionProps) {
   };
 
   const replaceBalloon = (id: number) => {
-  setBalloons((prev) => {
-    // Only replace if it's still in the list (wasn't already popped manually)
-    const stillPresent = prev.some((b) => b.id === id);
-    if (!stillPresent) return prev;
+    setBalloons((prev) => {
+      // Only replace if it's still in the list (wasn't already popped manually)
+      const stillPresent = prev.some((b) => b.id === id);
+      if (!stillPresent) return prev;
 
-    balloonIdRef.current += 1;
-    const replacement = makeBalloon(balloonIdRef.current);
-    return [...prev.filter((b) => b.id !== id), replacement];
-  });
-};
+      balloonIdRef.current += 1;
+      const replacement = makeBalloon(balloonIdRef.current);
+      return [...prev.filter((b) => b.id !== id), replacement];
+    });
+  };
+
+  const handleNext = () => {
+    if (leaving) return;
+    setLeaving(true);
+    setTimeout(onNextSection, 900);
+  };
 
   return (
-    <section className={styles.hero}>
+    <section className={`${styles.hero} ${leaving ? styles.leaving : ""}`}>
       {/* Soft cinematic spotlight breathing behind everything */}
       <motion.div
         className={styles.spotlight}
@@ -215,108 +222,108 @@ export default function HeroSection({ onNextSection }: HeroSectionProps) {
       <audio ref={chimeRef} src={wishChime} preload="auto" />
       {/* Birthday Cake — tappable to make a wish */}
       <div
-  className={styles.cakeWrap}
-  ref={cakeWrapRef}
-  onClick={handleMakeWish}
-  role="button"
-  tabIndex={0}
-  aria-label="Tap the cake to make a wish"
-  onKeyDown={(e) => e.key === "Enter" && handleMakeWish()}
->
-  {/* Existing ambient glow stays as-is */}
-  <motion.div
-    className={styles.cakeGlow}
-    animate={
-      wishMade
-        ? { opacity: [0.4, 0.9, 0.5], scale: [0.9, 1.25, 1.05] }
-        : { opacity: [0.4, 0.7, 0.4], scale: [0.9, 1.05, 0.9] }
-    }
-    transition={{
-      duration: wishMade ? 1 : 3,
-      repeat: wishMade ? 0 : Infinity,
-      ease: "easeInOut",
-      delay: wishMade ? 0 : 1.2,
-    }}
-  />
+        className={styles.cakeWrap}
+        ref={cakeWrapRef}
+        onClick={handleMakeWish}
+        role="button"
+        tabIndex={0}
+        aria-label="Tap the cake to make a wish"
+        onKeyDown={(e) => e.key === "Enter" && handleMakeWish()}
+      >
+        {/* Existing ambient glow stays as-is */}
+        <motion.div
+          className={styles.cakeGlow}
+          animate={
+            wishMade
+              ? { opacity: [0.4, 0.9, 0.5], scale: [0.9, 1.25, 1.05] }
+              : { opacity: [0.4, 0.7, 0.4], scale: [0.9, 1.05, 0.9] }
+          }
+          transition={{
+            duration: wishMade ? 1 : 3,
+            repeat: wishMade ? 0 : Infinity,
+            ease: "easeInOut",
+            delay: wishMade ? 0 : 1.2,
+          }}
+        />
 
-  {/* NEW — pulsing "tap me" rings, only shown before the wish is made */}
-  {!wishMade && (
-  <>
-    <motion.div
-      className={styles.tapRing}
-      initial={{ scale: 0.5, opacity: 0 }}
-      animate={{ scale: [0.5, 1.4], opacity: [0, 0.8, 0] }}
-      transition={{
-        duration: 2.4,
-        repeat: Infinity,
-        ease: "easeOut",
-        delay: 2,
-        times: [0, 0.3, 1],
-      }}
-    />
-    <motion.div
-      className={styles.tapRing}
-      initial={{ scale: 0.5, opacity: 0 }}
-      animate={{ scale: [0.5, 1.4], opacity: [0, 0.8, 0] }}
-      transition={{
-        duration: 2.4,
-        repeat: Infinity,
-        ease: "easeOut",
-        delay: 3.2,
-        times: [0, 0.3, 1],
-      }}
-    />
-  </>
-)}
+        {/* NEW — pulsing "tap me" rings, only shown before the wish is made */}
+        {!wishMade && (
+          <>
+            <motion.div
+              className={styles.tapRing}
+              initial={{ scale: 0.5, opacity: 0 }}
+              animate={{ scale: [0.5, 1.4], opacity: [0, 0.8, 0] }}
+              transition={{
+                duration: 2.4,
+                repeat: Infinity,
+                ease: "easeOut",
+                delay: 2,
+                times: [0, 0.3, 1],
+              }}
+            />
+            <motion.div
+              className={styles.tapRing}
+              initial={{ scale: 0.5, opacity: 0 }}
+              animate={{ scale: [0.5, 1.4], opacity: [0, 0.8, 0] }}
+              transition={{
+                duration: 2.4,
+                repeat: Infinity,
+                ease: "easeOut",
+                delay: 3.2,
+                times: [0, 0.3, 1],
+              }}
+            />
+          </>
+        )}
 
-  <motion.img
-    src={cakeImg}
-    alt="Birthday Cake"
-    className={styles.cakeGif}
-    initial={{ opacity: 0, scale: 0.8 }}
-    animate={
-      wishMade
-        ? { opacity: 1, scale: [1, 1.12, 1], rotate: [0, -3, 3, 0] }
-        : { opacity: 1, scale: 1 }
-    }
-    transition={{
-      duration: wishMade ? 0.6 : 0.6,
-      delay: wishMade ? 0 : 0.8,
-      ease: "easeOut",
-    }}
-    whileHover={!wishMade ? { scale: 1.04 } : {}}
-  />
+        <motion.img
+          src={cakeImg}
+          alt="Birthday Cake"
+          className={styles.cakeGif}
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={
+            wishMade
+              ? { opacity: 1, scale: [1, 1.12, 1], rotate: [0, -3, 3, 0] }
+              : { opacity: 1, scale: 1 }
+          }
+          transition={{
+            duration: wishMade ? 0.6 : 0.6,
+            delay: wishMade ? 0 : 0.8,
+            ease: "easeOut",
+          }}
+          whileHover={!wishMade ? { scale: 1.04 } : {}}
+        />
 
-  {!wishMade && (
-    <motion.span
-      className={styles.wishHint}
-      initial={{ opacity: 0, y: 6 }}
-      animate={{
-        opacity: [0.85, 1, 0.85],
-        y: [0, -4, 0],
-      }}
-      transition={{
-        duration: 1.8,
-        repeat: Infinity,
-        ease: "easeInOut",
-        delay: 2, // sync with the rings starting
-      }}
-    >
-      tap to make a wish ✨
-    </motion.span>
-  )}
+        {!wishMade && (
+          <motion.span
+            className={styles.wishHint}
+            initial={{ opacity: 0, y: 6 }}
+            animate={{
+              opacity: [0.85, 1, 0.85],
+              y: [0, -4, 0],
+            }}
+            transition={{
+              duration: 1.8,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 2, // sync with the rings starting
+            }}
+          >
+            tap to make a wish ✨
+          </motion.span>
+        )}
 
-  {wishMade && (
-    <motion.span
-      className={styles.wishMadeText}
-      initial={{ opacity: 0, y: 8 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.2, duration: 0.5 }}
-    >
-      wish made 🌟 may it come true
-    </motion.span>
-  )}
-</div>
+        {wishMade && (
+          <motion.span
+            className={styles.wishMadeText}
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.5 }}
+          >
+            wish made 🌟 may it come true
+          </motion.span>
+        )}
+      </div>
 
       {/* The wish itself, drifting upward and away a few seconds after being made */}
       <AnimatePresence>
@@ -365,7 +372,7 @@ export default function HeroSection({ onNextSection }: HeroSectionProps) {
       {/* Next Surprise Button */}
       <motion.button
         className={`btn-primary ${styles.nextButton}`}
-        onClick={onNextSection}
+        onClick={handleNext}
         initial={{ opacity: 0, y: 12 }}
         animate={{
           opacity: showButton ? 1 : 0,
@@ -412,17 +419,12 @@ export default function HeroSection({ onNextSection }: HeroSectionProps) {
         <motion.div
           className={styles.train}
           initial={{ x: "-18vw", scaleX: 1 }}
-          animate={{
-            x: ["-18vw", "118vw", "118vw", "-18vw", "-18vw"],
-            scaleX: [1, 1, -1, -1, 1],
-          }}
-          transition={{
-            duration: 18,
-            delay: 2.5,
-            repeat: Infinity,
-            ease: "linear",
-            times: [0, 0.47, 0.5, 0.97, 1],
-          }}
+          animate={leaving
+  ? { x: "125vw", scaleX: 1 }
+  : { x: ["-18vw", "118vw", "118vw", "-18vw", "-18vw"], scaleX: [1, 1, -1, -1, 1] }}
+          transition={leaving
+  ? { duration: 0.9, ease: "easeIn" }
+  : { duration: 18, delay: 2.5, repeat: Infinity, ease: "linear", times: [0, 0.47, 0.5, 0.97, 1] }}
         >
           <svg viewBox="0 0 400 110" className={styles.trainSvg}>
             {/* Pantograph (the arm on top that connects to overhead wires) */}
@@ -668,51 +670,83 @@ export default function HeroSection({ onNextSection }: HeroSectionProps) {
 
       {/* Bonus balloons — unlocked after the wish, poppable, replenishing */}
       <AnimatePresence>
-  {balloons.map((balloon) => (
-    <motion.div
-      key={balloon.id}
-      className={styles.balloonWrap}
-      style={{ left: `${balloon.left}%` }}
-      initial={{ y: "20vh", opacity: 0, scale: 0.7 }}
-      animate={{
-        y: "-120vh",
-        opacity: [0, 1, 1, 0.8, 0],
-        x: [0, 12, -10, 15, 0],
-        scale: 1,
-      }}
-      exit={{ scale: 0, opacity: 0, transition: { duration: 0.2 } }}
-      transition={{
-        y: { duration: balloon.riseDuration, ease: "linear" },
-        x: { duration: balloon.riseDuration, ease: "easeInOut" },
-        opacity: { duration: balloon.riseDuration, times: [0, 0.08, 0.75, 0.9, 1] },
-        scale: { duration: 0.5, ease: "easeOut" },
-      }}
-      onAnimationComplete={() => replaceBalloon(balloon.id)}
-      onClick={(e) => popBalloon(balloon.id, e)}
-      whileTap={{ scale: 0.85 }}
-    >
-      <svg viewBox="0 0 60 80" className={styles.balloonSvg}>
-        <defs>
-          <radialGradient id={`balloonGrad-${balloon.id}`} cx="35%" cy="30%" r="70%">
-            <stop offset="0%" stopColor="#ffffff" stopOpacity="0.55" />
-            <stop offset="35%" stopColor={balloon.color.body} stopOpacity="1" />
-            <stop offset="100%" stopColor={balloon.color.shade} stopOpacity="1" />
-          </radialGradient>
-        </defs>
-        <ellipse cx="30" cy="32" rx="26" ry="30" fill={`url(#balloonGrad-${balloon.id})`} />
-        <ellipse cx="21" cy="18" rx="7" ry="10" fill="#ffffff" opacity="0.4" />
-        <path d="M26 60 Q30 66 34 60 L30 56 Z" fill={balloon.color.shade} />
-        <path
-          d="M30 62 Q24 68 30 74 Q36 80 30 86"
-          stroke={balloon.color.shade}
-          strokeWidth="1.2"
-          fill="none"
-          opacity="0.6"
-        />
-      </svg>
-    </motion.div>
-  ))}
-</AnimatePresence>
+        {balloons.map((balloon) => (
+          <motion.div
+            key={balloon.id}
+            className={styles.balloonWrap}
+            style={{ left: `${balloon.left}%` }}
+            initial={{ y: "20vh", opacity: 0, scale: 0.7 }}
+            animate={{
+              y: "-120vh",
+              opacity: [0, 1, 1, 0.8, 0],
+              x: [0, 12, -10, 15, 0],
+              scale: 1,
+            }}
+            exit={{ scale: 0, opacity: 0, transition: { duration: 0.2 } }}
+            transition={{
+              y: { duration: balloon.riseDuration, ease: "linear" },
+              x: { duration: balloon.riseDuration, ease: "easeInOut" },
+              opacity: {
+                duration: balloon.riseDuration,
+                times: [0, 0.08, 0.75, 0.9, 1],
+              },
+              scale: { duration: 0.5, ease: "easeOut" },
+            }}
+            onAnimationComplete={() => replaceBalloon(balloon.id)}
+            onClick={(e) => popBalloon(balloon.id, e)}
+            whileTap={{ scale: 0.85 }}
+          >
+            <svg viewBox="0 0 60 80" className={styles.balloonSvg}>
+              <defs>
+                <radialGradient
+                  id={`balloonGrad-${balloon.id}`}
+                  cx="35%"
+                  cy="30%"
+                  r="70%"
+                >
+                  <stop offset="0%" stopColor="#ffffff" stopOpacity="0.55" />
+                  <stop
+                    offset="35%"
+                    stopColor={balloon.color.body}
+                    stopOpacity="1"
+                  />
+                  <stop
+                    offset="100%"
+                    stopColor={balloon.color.shade}
+                    stopOpacity="1"
+                  />
+                </radialGradient>
+              </defs>
+              <ellipse
+                cx="30"
+                cy="32"
+                rx="26"
+                ry="30"
+                fill={`url(#balloonGrad-${balloon.id})`}
+              />
+              <ellipse
+                cx="21"
+                cy="18"
+                rx="7"
+                ry="10"
+                fill="#ffffff"
+                opacity="0.4"
+              />
+              <path
+                d="M26 60 Q30 66 34 60 L30 56 Z"
+                fill={balloon.color.shade}
+              />
+              <path
+                d="M30 62 Q24 68 30 74 Q36 80 30 86"
+                stroke={balloon.color.shade}
+                strokeWidth="1.2"
+                fill="none"
+                opacity="0.6"
+              />
+            </svg>
+          </motion.div>
+        ))}
+      </AnimatePresence>
     </section>
   );
 }

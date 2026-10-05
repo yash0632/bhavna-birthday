@@ -79,10 +79,9 @@
 
 
 .cakeGlow {
-  position: absolute !important;
-  top: 50% !important;
-  left: 50% !important;
-  transform: translate(-50%, -50%) !important;
+  position: absolute;
+  inset: 0;
+  margin: auto;
   width: clamp(180px, 46vw, 300px);
   height: clamp(180px, 46vw, 300px);
   border-radius: 50%;
@@ -478,8 +477,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: fit-content;
-  margin: 1.5rem auto;
+  margin: 1rem auto;
   z-index: 1;
   cursor: pointer;
   outline: none;
@@ -487,12 +485,11 @@
 
 .tapRing {
   position: absolute;
-  top: 50%;
-  left: 50%;
+  inset: 0;
+  margin: auto;
   width: clamp(140px, 36vw, 220px);
   height: clamp(140px, 36vw, 220px);
   border-radius: 50%;
-  transform: translate(-50%, -50%);
   pointer-events: none;
   z-index: 0;
   background: radial-gradient(
@@ -549,3 +546,50 @@
 .subtitle {
   margin-bottom: 1rem; /* was 1.5rem */
 }
+
+
+@media (max-height: 700px) {
+  .hero {
+    padding-top: 0.5rem;
+    padding-bottom: 3.5rem;
+  }
+  .greeting {
+    font-size: clamp(1.2rem, 5vw, 2rem);
+    margin-bottom: 0.25rem;
+  }
+  .banner {
+    width: clamp(140px, 50vw, 280px);
+    margin-bottom: 0.25rem;
+  }
+  .cakeWrap {
+    margin: 0.5rem auto;
+  }
+  .cakeGif {
+    width: clamp(110px, 30vw, 180px);
+  }
+  .subtitle {
+    margin-bottom: 0.5rem;
+    font-size: 0.85rem;
+  }
+  .nextButton {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+  .railwayScene {
+    height: 3rem;
+  }
+  .train {
+    width: clamp(100px, 35vw, 160px);
+  }
+}
+
+.leaving > *:not(.railwayScene):not(.particleField):not(.spotlight) {
+  opacity: 0 !important;
+  filter: blur(6px);
+  transition: opacity 0.5s ease, filter 0.5s ease;
+  pointer-events: none;
+}
+
+/* gives the "tap to make a wish" hint its own space */
+.cakeWrap { margin: 1rem auto 2.5rem; }
+@media (max-height: 700px) { .cakeWrap { margin: 0.5rem auto 2rem; } }
