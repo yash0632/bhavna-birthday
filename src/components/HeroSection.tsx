@@ -250,20 +250,20 @@ export default function HeroSection({ onNextSection }: HeroSectionProps) {
 
         {/* The train — a commuter EMU, side profile, crossing once */}
         <motion.div
-          className={styles.train}
-          initial={{ x: "-40vw", scaleX: 1 }}
-          animate={{
-            x: ["-40vw", "140vw", "140vw", "-40vw", "-40vw"],
-            scaleX: [1, 1, -1, -1, 1],
-          }}
-          transition={{
-            duration: 24,
+  className={styles.train}
+  initial={{ x: "-18vw", scaleX: 1 }}
+  animate={{
+    x: ["-18vw", "118vw", "118vw", "-18vw", "-18vw"],
+    scaleX: [1, 1, -1, -1, 1],
+  }}
+  transition={{
+    duration: 18,
     delay: 2.5,
     repeat: Infinity,
     ease: "linear",
-    times: [0, 0.45, 0.5, 0.95, 1],
-          }}
-        >
+    times: [0, 0.47, 0.5, 0.97, 1],
+  }}
+>
           <svg viewBox="0 0 400 110" className={styles.trainSvg}>
             {/* Pantograph (the arm on top that connects to overhead wires) */}
             <line
@@ -367,7 +367,7 @@ export default function HeroSection({ onNextSection }: HeroSectionProps) {
             ))} */}
 
             {/* The one window with a tiny glimpse inside — ludo die on the sill */}
-            <rect
+            {/* <rect
               x="190"
               y="30"
               width="28"
@@ -379,7 +379,7 @@ export default function HeroSection({ onNextSection }: HeroSectionProps) {
             />
             <text x="204" y="49" fontSize="15" textAnchor="middle">
               🎲
-            </text>
+            </text> */}
 
             
 
