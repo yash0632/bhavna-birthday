@@ -381,9 +381,17 @@
 
 @media (max-width: 640px) {
   .railwayScene {
-    height: 3rem;
+    bottom: 0;
+    height: 4.5rem;  /* was 3rem/4rem — not tall enough for the train body */
   }
   .train {
     width: clamp(140px, 50vw, 200px);
+    bottom: 14px;  /* lift the train up a bit so its full height clears the track line */
+  }
+}
+
+@media (max-width: 640px) {
+  .hero {
+    padding-bottom: 4.5rem; /* smaller, fixed value — matches the new railwayScene height */
   }
 }
