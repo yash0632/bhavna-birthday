@@ -6,11 +6,13 @@
   position: relative;
   min-height: 100vh;
   min-height: 100svh;
+  max-height: 100svh;      /* NEW — hard cap, prevents overflow-driven scroll */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: clamp(2rem, 8vw, 6rem);
+  padding: clamp(1rem, 4vw, 3rem) clamp(2rem, 8vw, 6rem) clamp(4.5rem, 10vh, 7rem);
+  overflow: hidden;         
   background: radial-gradient(
       ellipse at top,
       rgba(252, 231, 243, 0.8) 0%,
@@ -74,17 +76,13 @@
 }
 
 /* Cake wrapper + glow */
-.cakeWrap {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 1.5rem 0;
-  z-index: 1;
-}
+
 
 .cakeGlow {
-  position: absolute;
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
   width: clamp(180px, 46vw, 300px);
   height: clamp(180px, 46vw, 300px);
   border-radius: 50%;
@@ -240,10 +238,7 @@
 /* ==========================================
    Interactive cake wrap
    ========================================== */
-.cakeWrap {
-  cursor: pointer;
-  outline: none;
-}
+
 
 .wishHint {
   position: absolute;
@@ -407,4 +402,150 @@
   filter: drop-shadow(0 0 8px rgba(244, 114, 182, 0.7))
     drop-shadow(0 0 16px rgba(244, 114, 182, 0.4));
   transform: translate(-50%, -50%);
+}
+
+/* ==========================================
+   Bonus balloons — poppable, after the wish
+   ========================================== */
+
+
+.balloonSvg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+@media (max-width: 640px) {
+  .balloonWrap {
+    bottom: 6%;
+    width: clamp(38px, 11vw, 50px);
+  }
+}
+
+.balloonField {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; /* was 40% — balloons now travel the full height */
+  pointer-events: none;
+  z-index: 2;
+  overflow: hidden;
+}
+
+.balloonWrap {
+  position: absolute;
+  bottom: 0;
+  width: clamp(44px, 8vw, 62px);
+  cursor: pointer;
+  pointer-events: auto;
+  filter: drop-shadow(0 4px 10px rgba(190, 24, 93, 0.25));
+}
+
+/* ==========================================
+   Tap cue — pulsing rings drawing the eye to the cake
+   ========================================== */
+/* .tapRing {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: clamp(140px, 36vw, 220px);
+  height: clamp(140px, 36vw, 220px);
+  border-radius: 50%;
+  border: 2px solid rgba(244, 114, 182, 0.6);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 0;
+} */
+
+/* Bolder, bouncing wish hint — replaces the previous quieter version */
+.wishHint {
+  position: absolute;
+  bottom: -2.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-family: var(--font-handwritten, var(--font-body));
+  font-size: clamp(0.95rem, 3.2vw, 1.15rem);
+  font-weight: 600;
+  color: #be185d;
+  text-shadow: 0 1px 6px rgba(244, 114, 182, 0.3);
+  z-index: 2;
+}
+
+.cakeWrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  margin: 1.5rem auto;
+  z-index: 1;
+  cursor: pointer;
+  outline: none;
+}
+
+.tapRing {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: clamp(140px, 36vw, 220px);
+  height: clamp(140px, 36vw, 220px);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(
+    circle,
+    rgba(190, 24, 93, 0.45) 0%,
+    rgba(236, 72, 153, 0.25) 35%,
+    rgba(244, 114, 182, 0.1) 65%,
+    rgba(244, 114, 182, 0) 100%
+  );
+}
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  max-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(0.75rem, 3vw, 2rem) clamp(2rem, 8vw, 6rem) clamp(4.5rem, 9vh, 6rem);
+  overflow: hidden;
+  background: radial-gradient(
+      ellipse at top,
+      rgba(252, 231, 243, 0.8) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      ellipse at bottom right,
+      rgba(249, 168, 212, 0.3) 0%,
+      transparent 50%
+    ),
+    linear-gradient(135deg, #fdf2f8 0%, #fce7f3 50%, #fbcfe8 100%);
+}
+
+@media (max-width: 640px) {
+  .hero {
+    padding-bottom: 4.5rem;
+  }
+}
+
+.greeting {
+  margin-bottom: 0.5rem; /* was 0.75rem */
+}
+
+.banner {
+  margin-bottom: 0.5rem; /* was 1rem */
+}
+
+.cakeWrap {
+  margin: 1rem auto; /* was 1.5rem auto */
+}
+
+.subtitle {
+  margin-bottom: 1rem; /* was 1.5rem */
 }
