@@ -798,8 +798,23 @@
    Tap anywhere while dealing to skip straight to the end.
    ========================================== */
 
+/* ==========================================
+   PhotoGallery - Living Polaroid Gallery
+
+   Entrance: the photos drift down softly, one by one, and
+   "develop" into focus like real polaroids. Captions and
+   hearts appear once everything has settled.
+   Exit: the photos are gathered up and tucked away toward
+   the centre, like being slipped into an envelope.
+   Tap anywhere while dealing to skip straight to the end.
+   ========================================== */
+
 import { useEffect, useMemo, useRef, useState } from "react";
-import { motion, AnimatePresence, useAnimationControls } from "framer-motion";
+import {
+  motion,
+  AnimatePresence,
+  useAnimationControls,
+} from "framer-motion";
 import confetti from "canvas-confetti";
 import styles from "./PhotoGallery.module.css";
 import { useInView } from "../hooks/useInView";
@@ -861,7 +876,7 @@ function MemoryCard({
       y: 50,
       rotate: wobble.base + (Math.random() * 8 - 4),
     }),
-    [wobble.base],
+    [wobble.base]
   );
 
   const landed = {
@@ -964,9 +979,7 @@ function MemoryCard({
   return (
     <motion.div
       ref={(node) => {
-        (
-          cardObserver.ref as React.MutableRefObject<HTMLDivElement | null>
-        ).current = node;
+        (cardObserver.ref as React.MutableRefObject<HTMLDivElement | null>).current = node;
         cardElRef.current = node;
       }}
       className={styles.photoFrame}
@@ -1041,9 +1054,7 @@ function MemoryCard({
                 e.stopPropagation();
                 onToggleFavorite(index, cardElRef.current);
               }}
-              aria-label={
-                isFavorited ? "Remove from favorites" : "Mark as favorite"
-              }
+              aria-label={isFavorited ? "Remove from favorites" : "Mark as favorite"}
             >
               {isFavorited ? "❤" : "🤍"}
             </button>
@@ -1076,7 +1087,7 @@ export default function PhotoGallery({
   useEffect(() => {
     const t = setTimeout(
       () => setRevealed(true),
-      (START_DELAY + (photos.length - 1) * STAGGER + SETTLE) * 1000,
+      (START_DELAY + (photos.length - 1) * STAGGER + SETTLE) * 1000
     );
     return () => clearTimeout(t);
   }, [photos.length]);
@@ -1100,13 +1111,10 @@ export default function PhotoGallery({
         duration: 3.2 + (i % 4) * 0.4,
         delay: (i % 5) * 0.3,
       })),
-    [photos],
+    [photos]
   );
 
-  const handleToggleFavorite = (
-    index: number,
-    cardEl: HTMLDivElement | null,
-  ) => {
+  const handleToggleFavorite = (index: number, cardEl: HTMLDivElement | null) => {
     setFavorited((prev) => {
       const next = new Set(prev);
       if (next.has(index)) {
@@ -1135,10 +1143,7 @@ export default function PhotoGallery({
   };
 
   const favoritedCount = favorited.size;
-  const chromeFade = {
-    opacity: gathering ? 0 : 1,
-    transition: "opacity 0.4s ease",
-  };
+  const chromeFade = { opacity: gathering ? 0 : 1, transition: "opacity 0.4s ease" };
 
   return (
     <section className={styles.gallery} onClick={handleSkip}>
@@ -1170,14 +1175,30 @@ export default function PhotoGallery({
         {title}
       </motion.h2>
 
-      <motion.p
-        className={styles.gallerySubtitle}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: revealed && !gathering ? 1 : 0 }}
-        transition={{ duration: 0.6 }}
-      >
-        tap any memory to look closer, tap the memory to keep it close ✨
-      </motion.p>
+      {/* One slot, two messages stacked in the same spot: the hint shows until
+          she likes something, then the counter takes its place. The slot is
+          always as tall as the taller message, so nothing ever shifts. */}
+      <div className={styles.hintSlot}>
+        <motion.p
+          className={styles.gallerySubtitle}
+          initial={{ opacity: 0 }}
+          animate={{
+            opacity: revealed && !gathering && favoritedCount === 0 ? 1 : 0,
+          }}
+          transition={{ duration: 0.5 }}
+        >
+          tap any memory to look closer, tap the 🤍 on a memory to like it ✨
+        </motion.p>
+        <motion.p
+          className={styles.favoriteCount}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: !gathering && favoritedCount > 0 ? 1 : 0 }}
+          transition={{ duration: 0.5 }}
+          aria-live="polite"
+        >
+          {favoritedCount} {favoritedCount === 1 ? "memory" : "memories"} you liked with us ✨
+        </motion.p>
+      </div>
 
       <div className={styles.photoGrid}>
         {photos.map((item, index) => (
@@ -1196,17 +1217,6 @@ export default function PhotoGallery({
           />
         ))}
       </div>
-
-      {favoritedCount > 0 && !gathering && (
-        <motion.p
-          className={styles.favoriteCount}
-          initial={{ opacity: 0, y: 6 }}
-          animate={{ opacity: 1, y: 0 }}
-        >
-          {favoritedCount} {favoritedCount === 1 ? "memory" : "memories"} close
-          to your heart 💕
-        </motion.p>
-      )}
 
       <motion.button
         className={`btn-primary ${styles.continueButton}`}
