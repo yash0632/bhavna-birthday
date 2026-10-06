@@ -789,6 +789,17 @@
    Tap anywhere while dealing to skip straight to the end.
    ========================================== */
 
+/* ==========================================
+   PhotoGallery - Living Polaroid Gallery
+
+   Entrance: the photos drift down softly, one by one, and
+   "develop" into focus like real polaroids. Captions and
+   hearts appear once everything has settled.
+   Exit: the photos are gathered up and tucked away toward
+   the centre, like being slipped into an envelope.
+   Tap anywhere while dealing to skip straight to the end.
+   ========================================== */
+
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
   motion,
@@ -843,6 +854,7 @@ function MemoryCard({
   const [isLoaded, setIsLoaded] = useState(false);
   const cardObserver = useInView("0px");
   const cardElRef = useRef<HTMLDivElement | null>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const controls = useAnimationControls();
 
   const [developed, setDeveloped] = useState(false);
@@ -865,6 +877,32 @@ function MemoryCard({
     opacity: 1,
     rotate: wobble.base,
   };
+
+  // Mobile browsers are strict about video. React doesn't reliably put the
+  // `muted` attribute on the element, and `autoPlay` is ignored when it changes
+  // after mount, so we mute and play/pause the video ourselves.
+  useEffect(() => {
+    const v = videoRef.current;
+    if (!v || item.type !== "video") return;
+    v.muted = true;
+    v.defaultMuted = true;
+    v.playsInline = true;
+    if (cardObserver.isInView) {
+      v.play().catch(() => {
+        /* Low Power Mode / data saver: the first frame still shows */
+      });
+    } else {
+      v.pause();
+    }
+  }, [cardObserver.isInView, item.type]);
+
+  // Phones often never fire "loadeddata" for preload="metadata",
+  // which left the video invisible. Show it after a moment regardless.
+  useEffect(() => {
+    if (item.type !== "video") return;
+    const t = setTimeout(() => setIsLoaded(true), 1500);
+    return () => clearTimeout(t);
+  }, [item.type]);
 
   // The deal
   useEffect(() => {
@@ -964,16 +1002,19 @@ function MemoryCard({
 
           {item.type === "video" && (
             <video
+              ref={videoRef}
               className={styles.photo}
-              src={item.src}
+              // "#t=0.001" makes iPhones draw the first frame as a preview
+              src={item.src.includes("#") ? item.src : `${item.src}#t=0.001`}
               poster={item.poster}
-              autoPlay={cardObserver.isInView}
               loop
               muted
               playsInline
               preload="metadata"
               disablePictureInPicture
+              onLoadedMetadata={() => setIsLoaded(true)}
               onLoadedData={() => setIsLoaded(true)}
+              onCanPlay={() => setIsLoaded(true)}
               style={{ opacity: isLoaded ? 1 : 0, ...develop }}
             />
           )}
