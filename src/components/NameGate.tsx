@@ -558,12 +558,7 @@ interface NameGateProps {
   onVerified: () => void;
 }
 
-type TypingPhase =
-  | "typing1"
-  | "fading1"
-  | "typing2"
-  | "fading2"
-  | "done";
+type TypingPhase = "typing1" | "fading1" | "done";
 
 export default function NameGate({ onVerified }: NameGateProps) {
   const [nameInput, setNameInput] = useState("");
@@ -572,25 +567,18 @@ export default function NameGate({ onVerified }: NameGateProps) {
   const [wrongAttempt, setWrongAttempt] = useState(false);
 
   // Typing animation state
-  const [typingPhase, setTypingPhase] =
-    useState<TypingPhase>("typing1");
+  const [typingPhase, setTypingPhase] = useState<TypingPhase>("typing1");
 
   const [typedText, setTypedText] = useState("");
 
   const firstText = config.typingText.first;
-  const secondText = config.typingText.second;
 
   // Typing animation effect
   useEffect(() => {
     // First text typing
-    if (
-      typingPhase === "typing1" &&
-      typedText.length < firstText.length
-    ) {
+    if (typingPhase === "typing1" && typedText.length < firstText.length) {
       const timeout = setTimeout(() => {
-        setTypedText(
-          firstText.slice(0, typedText.length + 1)
-        );
+        setTypedText(firstText.slice(0, typedText.length + 1));
       }, 90);
 
       return () => clearTimeout(timeout);
@@ -608,62 +596,22 @@ export default function NameGate({ onVerified }: NameGateProps) {
       return () => clearTimeout(timeout);
     }
 
-    // Fade first text
+    // Fade first text, then go straight to done
     else if (typingPhase === "fading1") {
-      const timeout = setTimeout(() => {
-        setTypedText("");
-        setTypingPhase("typing2");
-      }, 600);
-
-      return () => clearTimeout(timeout);
-    }
-
-    // Second text typing
-    else if (
-      typingPhase === "typing2" &&
-      typedText.length < secondText.length
-    ) {
-      const timeout = setTimeout(() => {
-        setTypedText(
-          secondText.slice(0, typedText.length + 1)
-        );
-      }, 75);
-
-      return () => clearTimeout(timeout);
-    }
-
-    // Second text completed
-    else if (
-      typingPhase === "typing2" &&
-      typedText.length === secondText.length
-    ) {
-      const timeout = setTimeout(() => {
-        setTypingPhase("fading2");
-      }, 1000);
-
-      return () => clearTimeout(timeout);
-    }
-
-    // Fade second text
-    else if (typingPhase === "fading2") {
       const timeout = setTimeout(() => {
         setTypingPhase("done");
       }, 600);
 
       return () => clearTimeout(timeout);
     }
-  }, [
-    typedText,
-    typingPhase,
-    firstText,
-    secondText,
-  ]);
+  }, [typedText, typingPhase, firstText]);
 
   // Handle name submission
   const handleNameSubmit = () => {
+    const typedName = nameInput.toLowerCase().trim();
     const isCorrect =
-      nameInput.toLowerCase().trim() ===
-      config.recipientName.toLowerCase().trim();
+      typedName === config.recipientName.toLowerCase().trim() ||
+      typedName === config.recipientNameAlt.toLowerCase().trim();
 
     // Log attempt
     fetch(
@@ -700,9 +648,7 @@ export default function NameGate({ onVerified }: NameGateProps) {
   };
 
   // Handle Enter key
-  const handleKeyPress = (
-    e: React.KeyboardEvent
-  ) => {
+  const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === "Enter") {
       handleNameSubmit();
     }
@@ -726,46 +672,21 @@ export default function NameGate({ onVerified }: NameGateProps) {
         initial={{ opacity: 1 }}
         animate={{ opacity: 1 }}
       >
-        {/* First typing animation */}
+        {/* First (and only) typing animation */}
         <AnimatePresence mode="wait">
-          {(typingPhase === "typing1" ||
-            typingPhase === "fading1") && (
+          {(typingPhase === "typing1" || typingPhase === "fading1") && (
             <motion.p
               key="typing-text-1"
-              className="start-title typing-text"
+              className="start-title-pink typing-text"
               initial={{ opacity: 1 }}
               animate={{
-                opacity:
-                  typingPhase === "fading1" ? 0 : 1,
+                opacity: typingPhase === "fading1" ? 0 : 1,
               }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.5 }}
             >
               {typedText}
-              <span className="typing-cursor">
-                |
-              </span>
-            </motion.p>
-          )}
-
-          {/* Second typing animation */}
-          {(typingPhase === "typing2" ||
-            typingPhase === "fading2") && (
-            <motion.p
-              key="typing-text-2"
-              className="start-subtitle typing-text"
-              initial={{ opacity: 1 }}
-              animate={{
-                opacity:
-                  typingPhase === "fading2" ? 0 : 1,
-              }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              {typedText}
-              <span className="typing-cursor">
-                |
-              </span>
+              <span className="typing-cursor">|</span>
             </motion.p>
           )}
         </AnimatePresence>
@@ -794,11 +715,7 @@ export default function NameGate({ onVerified }: NameGateProps) {
             >
               🎂
             </motion.span>
-            <motion.p
-              className="start-question"
-            >
-              Who are you?
-            </motion.p>
+            <motion.p className="start-question">Who are you?</motion.p>
 
             <motion.input
               type="text"
@@ -855,8 +772,7 @@ export default function NameGate({ onVerified }: NameGateProps) {
                   delay: 0.3,
                 }}
               >
-                💡 Hint: It's{" "}
-                {config.nameHint}
+                💡 Hint: It's {config.nameHint}
               </motion.p>
             )}
 
@@ -890,7 +806,6 @@ export default function NameGate({ onVerified }: NameGateProps) {
     </motion.div>
   );
 }
-
 // import { useState, useEffect } from "react";
 // import { motion, AnimatePresence } from "framer-motion";
 // import { config } from "../config";

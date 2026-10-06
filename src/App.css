@@ -163,6 +163,13 @@ body {
   letter-spacing: 0.05em;
 }
 
+.start-title-pink {
+  font-family: var(--font-handwritten);
+  font-size: clamp(1.8rem, 6vw, 4rem);
+  color: rgba(255, 182, 193, 0.8);
+  margin-bottom: 0.5rem;
+}
+
 .start-question {
   font-family: var(--font-handwritten, var(--font-body));
   font-size: clamp(1.75rem, 6vw, 2.75rem);

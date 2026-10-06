@@ -8,6 +8,7 @@
 export const config = {
   /* Name Verification Gate */
   recipientName: "Bhavna", // required name to enter
+  recipientNameAlt: "Bhavna Sharma", // also accepted
   nameHint: '6 letters, starts with "B"', // hint on wrong name
 
   groupName: "OnlyPlans", // required group name to enter
@@ -16,7 +17,7 @@ export const config = {
   /* Section Headings */
   soloGalleryTitle: "✨ Birthday Girl ✨", // solo gallery title
   messageTitle: "To Our Train Friend", // letter section title
-  footerText: "Made with 💗 just for you", // footer text
+  footerText: "Made with care, just for you", // footer text
 
   /* Button Labels */
   buttons: {

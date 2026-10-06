@@ -326,7 +326,6 @@
 //   );
 // }
 
-
 /* ==========================================
    PhotoGallery - Living Polaroid Gallery
 
@@ -777,7 +776,6 @@
 //   );
 // }
 
-
 /* ==========================================
    PhotoGallery - Living Polaroid Gallery
 
@@ -801,11 +799,7 @@
    ========================================== */
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import {
-  motion,
-  AnimatePresence,
-  useAnimationControls,
-} from "framer-motion";
+import { motion, AnimatePresence, useAnimationControls } from "framer-motion";
 import confetti from "canvas-confetti";
 import styles from "./PhotoGallery.module.css";
 import { useInView } from "../hooks/useInView";
@@ -867,7 +861,7 @@ function MemoryCard({
       y: 50,
       rotate: wobble.base + (Math.random() * 8 - 4),
     }),
-    [wobble.base]
+    [wobble.base],
   );
 
   const landed = {
@@ -970,7 +964,9 @@ function MemoryCard({
   return (
     <motion.div
       ref={(node) => {
-        (cardObserver.ref as React.MutableRefObject<HTMLDivElement | null>).current = node;
+        (
+          cardObserver.ref as React.MutableRefObject<HTMLDivElement | null>
+        ).current = node;
         cardElRef.current = node;
       }}
       className={styles.photoFrame}
@@ -1045,7 +1041,9 @@ function MemoryCard({
                 e.stopPropagation();
                 onToggleFavorite(index, cardElRef.current);
               }}
-              aria-label={isFavorited ? "Remove from favorites" : "Mark as favorite"}
+              aria-label={
+                isFavorited ? "Remove from favorites" : "Mark as favorite"
+              }
             >
               {isFavorited ? "❤" : "🤍"}
             </button>
@@ -1078,7 +1076,7 @@ export default function PhotoGallery({
   useEffect(() => {
     const t = setTimeout(
       () => setRevealed(true),
-      (START_DELAY + (photos.length - 1) * STAGGER + SETTLE) * 1000
+      (START_DELAY + (photos.length - 1) * STAGGER + SETTLE) * 1000,
     );
     return () => clearTimeout(t);
   }, [photos.length]);
@@ -1102,10 +1100,13 @@ export default function PhotoGallery({
         duration: 3.2 + (i % 4) * 0.4,
         delay: (i % 5) * 0.3,
       })),
-    [photos]
+    [photos],
   );
 
-  const handleToggleFavorite = (index: number, cardEl: HTMLDivElement | null) => {
+  const handleToggleFavorite = (
+    index: number,
+    cardEl: HTMLDivElement | null,
+  ) => {
     setFavorited((prev) => {
       const next = new Set(prev);
       if (next.has(index)) {
@@ -1134,26 +1135,29 @@ export default function PhotoGallery({
   };
 
   const favoritedCount = favorited.size;
-  const chromeFade = { opacity: gathering ? 0 : 1, transition: "opacity 0.4s ease" };
+  const chromeFade = {
+    opacity: gathering ? 0 : 1,
+    transition: "opacity 0.4s ease",
+  };
 
   return (
     <section className={styles.gallery} onClick={handleSkip}>
       <div className={styles.sideBorderLeft} style={chromeFade}>
         <span className={styles.borderDot} />
-        <span className={styles.borderHeart}>♡</span>
+        <span className={styles.borderHeart}>✨</span>
         <span className={styles.borderDot} />
-        <span className={styles.borderHeart}>❤</span>
+        <span className={styles.borderHeart}>🎈</span>
         <span className={styles.borderDot} />
-        <span className={styles.borderHeart}>♡</span>
+        <span className={styles.borderHeart}>🎁</span>
         <span className={styles.borderDot} />
       </div>
       <div className={styles.sideBorderRight} style={chromeFade}>
         <span className={styles.borderDot} />
-        <span className={styles.borderHeart}>♡</span>
+        <span className={styles.borderHeart}>🎀</span>
         <span className={styles.borderDot} />
-        <span className={styles.borderHeart}>❤</span>
+        <span className={styles.borderHeart}>✨</span>
         <span className={styles.borderDot} />
-        <span className={styles.borderHeart}>♡</span>
+        <span className={styles.borderHeart}>🎈</span>
         <span className={styles.borderDot} />
       </div>
 
@@ -1172,7 +1176,7 @@ export default function PhotoGallery({
         animate={{ opacity: revealed && !gathering ? 1 : 0 }}
         transition={{ duration: 0.6 }}
       >
-        tap any memory to look closer, tap the heart to keep it close ✨
+        tap any memory to look closer, tap the memory to keep it close ✨
       </motion.p>
 
       <div className={styles.photoGrid}>
@@ -1199,7 +1203,8 @@ export default function PhotoGallery({
           initial={{ opacity: 0, y: 6 }}
           animate={{ opacity: 1, y: 0 }}
         >
-          {favoritedCount} {favoritedCount === 1 ? "memory" : "memories"} close to your heart 💕
+          {favoritedCount} {favoritedCount === 1 ? "memory" : "memories"} close
+          to your heart 💕
         </motion.p>
       )}
 

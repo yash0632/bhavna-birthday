@@ -66,7 +66,7 @@ export default function GlimpseReveal() {
           exit={{ opacity: 0 }}
           transition={{ delay: 0.7, duration: 0.5 }}
         >
-          remember us? 💕
+          remember us? ✨
         </motion.p>
       )}
     </motion.div>
