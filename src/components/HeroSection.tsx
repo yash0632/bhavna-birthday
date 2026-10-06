@@ -300,7 +300,7 @@ export default function HeroSection({ onNextSection }: HeroSectionProps) {
             initial={{ opacity: 0, y: 6 }}
             animate={{
               opacity: [0.85, 1, 0.85],
-              y: [0, -4, 0],
+              y: [0, -6, 0], // was [0, -4, 0] — slightly bigger bounce
             }}
             transition={{
               duration: 1.8,
@@ -419,12 +419,25 @@ export default function HeroSection({ onNextSection }: HeroSectionProps) {
         <motion.div
           className={styles.train}
           initial={{ x: "-18vw", scaleX: 1 }}
-          animate={leaving
-  ? { x: "125vw", scaleX: 1 }
-  : { x: ["-18vw", "118vw", "118vw", "-18vw", "-18vw"], scaleX: [1, 1, -1, -1, 1] }}
-          transition={leaving
-  ? { duration: 0.9, ease: "easeIn" }
-  : { duration: 18, delay: 2.5, repeat: Infinity, ease: "linear", times: [0, 0.47, 0.5, 0.97, 1] }}
+          animate={
+            leaving
+              ? { x: "125vw", scaleX: 1 }
+              : {
+                  x: ["-18vw", "118vw", "118vw", "-18vw", "-18vw"],
+                  scaleX: [1, 1, -1, -1, 1],
+                }
+          }
+          transition={
+            leaving
+              ? { duration: 0.9, ease: "easeIn" }
+              : {
+                  duration: 18,
+                  delay: 2.5,
+                  repeat: Infinity,
+                  ease: "linear",
+                  times: [0, 0.47, 0.5, 0.97, 1],
+                }
+          }
         >
           <svg viewBox="0 0 400 110" className={styles.trainSvg}>
             {/* Pantograph (the arm on top that connects to overhead wires) */}
