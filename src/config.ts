@@ -50,7 +50,7 @@ message: [
   //"",
   "But really No pressure, though — if you want to come back, we'll be happy, and if you don't, we'll respect that completely.",
   //"",
-  "If I'm honest, these past few months — and you not wishing Anurag on his birthday — have already told me what the answer probably is. And that's okay.",
+  "If I'm honest, these past few months — and you not wishing Anurag on his birthday (usne phenyl peeli thi 🤣) — have already told me what the answer probably is. And that's okay.",
   //"",
   "So i am sorry for everything 🥲 - especially for the times i made things bad when they could have been better.",
   //"",
