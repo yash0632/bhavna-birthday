@@ -34,7 +34,7 @@ export const config = {
 
   /* Birthday Message: Each string is a paragraph */
 
-message: [
+message2: [
 
   "First of all Happy birthday Bhavna🥳🎂",
   //"",
@@ -70,6 +70,48 @@ message: [
   "Take care!",
   "Sorry yaar!",
   "- yash(Jalankhurra)"
+],
+
+
+message: [
+  "First of all, Happy Birthday Bhavna 🥳🎂",
+  
+  "I really dont know what to say, dont really know if you’ll even like this, but I hope you do.",
+  //"",
+  "I wanted to do something nice and special for your birthday however i could, so that things don’t end on bad terms.",
+  //"",
+  "I know i am not that a great friend or had ever been to you the way i am making you a website. The truth is, I’ve made quite a few mistakes this year and apologized so many times, i dont know if any more apologies will do any justice to you.",
+  //"",
+  "But There is one specific thing I need to apologize for, i talk to anurag daily and he had told me what a great friendship you both had and how both of you were best buddies, and it is hard to accept but directly or indirectly somehow, your friendship was torn because of me. i’ve apologized to anurag about this, but I feel I owe you an apology too, since you lost a good friend (I remembered you saying Anurag was someone you truly considered a good friend when we were coming from Ambience mall - that was a good day).",
+  //"",
+  "Also thankyou for your kindness for sending anurag to my company and somehow giving me a best friend and also for forgiving me and giving me one more chance on my birthday, never told you how much that meant to me.",
+  //"",
+  "I know making up this website does not make up for my mistakes, I only made it to try to make your birthday a little special, to make you smile once if possible, but somewhere hidden in all this two thousand eight hundred sixty seven lines of code, there’s a tiny bit hope you might forgive Anurag one day, and me too 🥲 and that we can share train rides together and maybe for one time, have a mountain trip, i still remember you saying mountains were the place you like most to visit(that neem karoli baba too). So maybe someday. Who knows?. 🏔️",
+  //"",
+  "We wanted to celebrate your birthday too and one time we actually made a plan(anurag even said you’d let us order anything on your birthday)",
+  //"",
+  "No pressure, though — if you want to come back, we'll be happy, and if you don't, we'll understand and respect that completely.",
+  //"",
+  "If I'm honest, these past few months — and you not wishing Anurag on his birthday (Usne phenyl peeli thi 🤣) — have already told me what the answer probably is. And that's okay.",
+  //"",
+  "So i am sorry for everything 🙂 - especially for the times i made things bad when they could have been better.",
+  //"",
+  "Anyway enough of all that,",
+  //"",
+  "Happy Birthday Once Again Bhavna",
+  //"",
+  "I hope this becomes one of your best birthdays, and i hope every birthday after this one is even better.",
+  //"",
+  "I hope all your wishes come true and Hope you and your family will always be healthy, happy and always smiling.",
+  //"",
+  "You dont have to reply to this message if you dont want to.",
+  //"",
+  "- No Pressure,No Expectations",
+  //"",
+  "Happy Birthday!",
+  "Take care!",
+  "Sorry yaar!",
+  "- Jalankhurra(yash)"
 ],
 
   /* Theme Colors - Change these to customize the entire website theme! */

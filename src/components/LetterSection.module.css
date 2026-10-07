@@ -291,3 +291,96 @@
     background-color: transparent;
   }
 }
+
+/*-------------------------------------------------------------------------------------/*
+
+
+/* ==========================================
+   APPEND THIS TO THE END OF LetterSection.module.css
+   The "which part would you like?" choice + quiet footer
+   ========================================== */
+
+.choiceBox {
+  margin: 0.5rem 0 0.25rem;
+  padding: 1rem 1.1rem 0.9rem;
+  border-radius: 12px;
+  background: rgba(253, 242, 248, 0.7);
+  border: 1px solid rgba(244, 114, 182, 0.22);
+  text-align: center;
+  cursor: default;
+}
+
+.choiceText {
+  font-family: var(--font-body);
+  font-size: clamp(0.88rem, 2.4vw, 1rem);
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin: 0 0 0.9rem;
+}
+
+.choiceButtons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.6rem;
+}
+
+/* Both buttons share one style so neither looks like the "right" answer */
+.choiceBtn {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: #a13d63;
+  background: #fff;
+  border: 1.5px solid rgba(244, 114, 182, 0.55);
+  border-radius: 999px;
+  padding: 0.6rem 1.15rem;
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
+}
+
+.choiceBtn:hover {
+  background: #fdf2f8;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(244, 114, 182, 0.2);
+}
+
+.choiceNote {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 0.75rem;
+  color: rgba(139, 69, 99, 0.55);
+  margin: 0.8rem 0 0;
+}
+
+/* Footer under the letter: hint + gentle "change course" links */
+.cardFooter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+  min-height: 1.6rem;
+}
+
+.softLink {
+  background: none;
+  border: none;
+  padding: 0.25rem 0.5rem;
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 0.8rem;
+  color: rgba(161, 61, 99, 0.75);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+.softLink:hover {
+  color: #a13d63;
+}
+
+@media (max-width: 480px) {
+  .choiceButtons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

@@ -595,3 +595,55 @@
 /* gives the "tap to make a wish" hint its own space */
 .cakeWrap { margin: 1rem auto 2.5rem; }
 @media (max-height: 700px) { .cakeWrap { margin: 0.5rem auto 2rem; } }
+
+/* ==========================================
+   APPEND THIS TO THE VERY END OF HeroSection.module.css
+   Keeps the train lane clear of the content on short screens
+   ========================================== */
+
+/* The train's lane is now a reserved strip at the bottom. Its height comes
+   from the train's own size, so the content above can never run into it. */
+.hero {
+  --train-w: clamp(220px, 32vw, 340px);
+  --train-lift: 11px; /* how far the train sits above the track */
+  --train-zone: calc(var(--train-w) * 0.275 + var(--train-lift) + 12px);
+  padding-bottom: var(--train-zone);
+}
+
+.railwayScene {
+  height: var(--train-zone);
+}
+
+.train {
+  width: var(--train-w);
+  bottom: var(--train-lift);
+}
+
+@media (max-width: 640px) {
+  .hero {
+    --train-w: clamp(140px, 50vw, 200px);
+    --train-lift: 14px;
+  }
+}
+
+@media (max-height: 700px) {
+  .hero {
+    --train-w: clamp(100px, 35vw, 160px);
+  }
+}
+
+/* The button's top gap shrinks with screen height (it was a fixed 3rem) */
+.nextButton {
+  margin-top: clamp(0.75rem, 3vh, 3rem) !important;
+}
+
+/* On wide-but-short screens (most laptops), size the banner and cake by
+   height too, so everything fits above the train lane. Phones are unaffected. */
+@media (min-height: 701px) {
+  .banner {
+    width: min(clamp(200px, 70vw, 400px), 40vh);
+  }
+  .cakeGif {
+    width: min(clamp(150px, 40vw, 250px), 25vh);
+  }
+}
