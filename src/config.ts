@@ -114,6 +114,34 @@ message: [
   "- Jalankhurra(yash)"
 ],
 
+message3: [
+  "Happy birthday Bhavna!",
+//"",
+"Hope you are doing good.",
+"I know I am not that close a friend to you to make you a website,",
+//"",
+"It's just that you forgave me on my birthday and came to my party and made it special. Never told you how much that meant to me.",
+//"",
+"We both had thought and planned to celebrate your birthday too and have a party too (Anurag said you will let us order anything and not that bakwas platter🤮).",
+"But it's not possible now 😞",
+"So I tried to make this little website to make your birthday a little special ,however I can.",
+//"",
+"I know this does not make up for my mistakes, but just wanted to do something good for once, to not let things end on bad terms.",
+//"",
+"Honestly ,Don't want to Pressure you by asking for any forgiveness or anything on your special day and We both are okay with your Decision. Will not try any more convincing",
+//"",
+"Anyway, enough of all that,",
+"Happy Birthday Once Again Bhavna!",
+//"",
+"I hope this becomes one of your best birthdays, and I hope every birthday after this one is even better.",
+//"",
+"I hope all your wishes come true and hope you and your family will always be healthy, happy, and always smiling.",
+//"",
+"Happy Birthday!",
+"Take care!",
+"- Jalankhurra (Yash)"
+],
+
   /* Theme Colors - Change these to customize the entire website theme! */
   colors: {
     primary: "#ec4899", // main color (buttons, accents)

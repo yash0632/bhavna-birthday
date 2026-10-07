@@ -300,7 +300,7 @@
    The "which part would you like?" choice + quiet footer
    ========================================== */
 
-.choiceBox {
+/* .choiceBox {
   margin: 0.5rem 0 0.25rem;
   padding: 1rem 1.1rem 0.9rem;
   border-radius: 12px;
@@ -325,7 +325,7 @@
   gap: 0.6rem;
 }
 
-/* Both buttons share one style so neither looks like the "right" answer */
+
 .choiceBtn {
   font-family: var(--font-body);
   font-size: 0.95rem;
@@ -352,7 +352,7 @@
   margin: 0.8rem 0 0;
 }
 
-/* Footer under the letter: hint + gentle "change course" links */
+
 .cardFooter {
   display: flex;
   flex-direction: column;
@@ -383,4 +383,4 @@
     flex-direction: column;
     align-items: stretch;
   }
-}
+} */
