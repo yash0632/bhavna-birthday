@@ -285,7 +285,7 @@ export default function LetterSection() {
   // Typing engine bookkeeping. Every run gets an id; bumping the id cancels
   // whatever was in flight, so stale timers can never touch state.
   const runIdRef = useRef(0);
-  const timeoutRef = useRef<ReturnType<typeof setTimeout>>();
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   const activeQueueRef = useRef<number[]>([]);
   const activeDoneRef = useRef<() => void>(() => {});
   const hasStartedRef = useRef(false);
