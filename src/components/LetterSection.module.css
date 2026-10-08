@@ -292,6 +292,19 @@
   }
 }
 
+/* Postscript line — privacy note after the sign-off, visually
+   distinct from the letter itself: quieter, smaller, practical */
+.postscriptLine {
+  font-family: var(--font-body);
+  font-size: clamp(0.75rem, 2vw, 0.85rem);
+  font-style: italic;
+  color: rgba(139, 69, 99, 0.55);
+  line-height: 1.6;
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px dashed rgba(244, 114, 182, 0.25);
+}
+
 /*-------------------------------------------------------------------------------------/*
 
 

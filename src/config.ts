@@ -115,7 +115,7 @@ message: [
 ],
 
 message3: [
-  "Happy birthday Bhavna!",
+  "Happy birthday Bhavna 🎂🥳!",
 //"",
 "Hope you are doing good.",
 "I know I am not that close a friend to you to make you a website,",
@@ -123,12 +123,13 @@ message3: [
 "It's just that you forgave me on my birthday and came to my party and made it special. Never told you how much that meant to me.",
 //"",
 "We both had thought and planned to celebrate your birthday too and have a party too (Anurag said you will let us order anything and not that bakwas platter🤮).",
-"But it's not possible now 😞",
+"But it's not possible now ,lets accept the reality😞",
 "So I tried to make this little website to make your birthday a little special ,however I can.",
 //"",
 "I know this does not make up for my mistakes, but just wanted to do something good for once, to not let things end on bad terms.",
 //"",
-"Honestly ,Don't want to Pressure you by asking for any forgiveness or anything on your special day and We both are okay with your Decision. Will not try any more convincing",
+"Sorry for any time i hurt you or made you feel bad.",
+"Honestly ,Don't want to Pressure you by asking you to forgive us or expect anything from you on your special day and We both respect your Decision. Will not try any more convincing",
 //"",
 "Anyway, enough of all that,",
 "Happy Birthday Once Again Bhavna!",
@@ -139,7 +140,8 @@ message3: [
 //"",
 "Happy Birthday!",
 "Take care!",
-"- Jalankhurra (Yash)"
+"- Jalankhurra (Yash)",
+"P.S. — this page isn't shared or searchable anywhere, the link's only ever been sent to you, and it'll come down on its own in 72 hours.",
 ],
 
   /* Theme Colors - Change these to customize the entire website theme! */

@@ -29,13 +29,17 @@ const START_DELAY = 500;
 // Now an array — every index in here gets the slower, emphasized treatment.
 // Indices 10-12 cover "Happy Birthday Once Again Bhavna!" through the
 // closing wishes (best birthday / every birthday after / all wishes + health)
-const EMPHASIS_INDICES = [10, 11, 12];
+const EMPHASIS_INDICES = [11, 12, 13];
 const EMPHASIS_SPEED_MULTIPLIER = 1.9;
 const PRE_EMPHASIS_PAUSE = 1100;
 const POST_EMPHASIS_PAUSE = 1600;
 
 function isEmphasisIndex(index: number) {
   return EMPHASIS_INDICES.includes(index);
+}
+
+function isPostscriptIndex(index: number, totalLength: number) {
+  return index === totalLength - 1;
 }
 
 export default function LetterSection() {
@@ -181,15 +185,17 @@ export default function LetterSection() {
         <div className={styles.letterContent} ref={contentRef}>
           {paragraphs.slice(0, completedCount).map((text, i) => (
             <p
-              key={i}
-              className={
-                isEmphasisIndex(i)
-                  ? `${styles.messageParagraph} ${styles.emphasisParagraph}`
-                  : styles.messageParagraph
-              }
-            >
-              {text}
-            </p>
+      key={i}
+      className={
+        isPostscriptIndex(i, paragraphs.length)
+          ? `${styles.messageParagraph} ${styles.postscriptLine}`
+          : isEmphasisIndex(i)
+          ? `${styles.messageParagraph} ${styles.emphasisParagraph}`
+          : styles.messageParagraph
+      }
+    >
+      {text}
+    </p>
           ))}
 
           {!isTypingComplete && currentTypedText && (
