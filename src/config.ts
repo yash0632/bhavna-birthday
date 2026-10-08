@@ -122,7 +122,7 @@ message3: [
 //"",
 "It's just that you forgave me on my birthday and came to my party and made it special. Never told you how much that meant to me.",
 //"",
-"We both had thought and planned to celebrate your birthday too and have a party too (Anurag said you will let us order anything and not that bakwas platter🤮).",
+"Once we both had thought and planned how to celebrate your birthday and have a party too (Anurag said you will let us order anything and not that bakwas platter🤮).",
 "But it's not possible now ,lets accept the reality😞",
 "So I tried to make this little website to make your birthday a little special ,however I can.",
 //"",
