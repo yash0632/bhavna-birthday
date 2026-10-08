@@ -124,7 +124,7 @@ message3: [
 //"",
 "Once we both had thought and planned how We will celebrate your birthday and have a party too (Anurag said you will let us order anything and not that bakwas platter🤮).",
 "But it's not possible now ,lets accept the reality😞",
-"So I tried to make this little website to make your birthday a little special ,however I can.",
+"So I tried to make this little website to make your birthday a little special ,however I can .Hope you like it",
 //"",
 "I know this does not make up for my mistakes, but just wanted to do something good for once, to not let things end on bad terms.",
 //"",
